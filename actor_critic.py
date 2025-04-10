@@ -21,6 +21,7 @@ class ActorCriticNet(nn.Module):
         super(ActorCriticNet, self).__init__()
         self.fc1 = nn.Linear(state_size, l1_units)
         self.fc2 = nn.Linear(l1_units, l2_units)
+        
         # Actor: for policy (action probabilities)
         self.actor_head = nn.Linear(l2_units, action_size)
         # Critic: outputs a single state-value
@@ -64,27 +65,15 @@ class Trainer_ActorCritic:
                            gamma=None,
                            avg_window=None,
                            n_steps=None):
-        """
-        Train the Actor–Critic agent using n‑step bootstrapping.
-        For each time step t in an episode, the n-step target is computed as:
-            Q̂ₙ(sₜ,aₜ) = Σ[k=0 to n-1] (γ^k * rₜ₊ₖ) + γⁿ * V(sₜ₊ₙ)
-        Then the critic is updated by minimizing:
-            L_critic = (Q̂ₙ(sₜ,aₜ) - V(sₜ))²
-        And the actor is updated with:
-            L_actor = -log π(aₜ|sₜ) * Q̂ₙ(sₜ,aₜ)
-        (Notice that here the policy gradient uses Q̂ₙ(sₜ,aₜ) directly, without subtracting V(sₜ).)
-        """
-        # Use configuration defaults if arguments not provided.
+
+
         max_steps = max_steps if max_steps is not None else self.config["training"]["steps"]
         l_rate = l_rate if l_rate is not None else self.config["training"]["lr"]
         gamma = gamma if gamma is not None else self.config["training"]["gamma"]
         avg_window = avg_window if avg_window is not None else self.config["training"]["avg_window"]
         n_steps = n_steps if n_steps is not None else self.config["training"].get("n_steps", 1)
 
-        # Instantiate the network.
-        model = self.Net(self.state_size, self.action_size,
-                         l1_units=self.config["model"]["l1_units"],
-                         l2_units=self.config["model"]["l2_units"])
+        model = self.Net(self.state_size, self.action_size, l1_units=self.config["model"]["l1_units"], l2_units=self.config["model"]["l2_units"])
         optimizer = optim.Adam(model.parameters(), lr=l_rate)
 
         env = gym.make(self.env_name)
@@ -114,10 +103,10 @@ class Trainer_ActorCritic:
                 done = terminated or truncated
 
                 episode_data.append({
-                    'state': state,       # raw state (numpy array)
-                    'action': action,     # torch tensor
-                    'reward': reward,     # scalar reward
-                    'log_prob': log_prob  # torch tensor
+                    'state': state,       # state 
+                    'action': action,     # action
+                    'reward': reward,     # reward data 
+                    'log_prob': log_prob  # log probs
                 })
 
                 state = next_state
@@ -131,15 +120,15 @@ class Trainer_ActorCritic:
             current_avg = np.mean(rewards_list[-avg_window:]) if len(rewards_list) >= avg_window else np.mean(rewards_list)
             avg_rewards.append(current_avg)
 
-            # --- Compute losses for the episode using n-step bootstrapping ---
+            # Critic - N-step boootstrapping part 
             actor_loss = 0.0
             critic_loss = 0.0
             T = len(episode_data)
 
             for t in range(T):
-                # Compute n-step target Q̂ₙ for time t.
+                # We Compute n-step target at the time t
                 Q_target = 0.0
-                # Sum rewards for steps t to t+n-1
+                # We take the sum of the tot<l rewards for steps t to t+n-1
                 for k in range(n_steps):
                     if t + k < T:
                         Q_target += (gamma ** k) * episode_data[t + k]['reward']
@@ -183,10 +172,16 @@ if __name__ == "__main__":
     config_path = "config.json"
     model_name = "Actor Critic (AC)"
     config_file = load_config(config_path)
+    
+    lr = config_file["training"].get("lr", 1)
+    episodes = config_file["training"].get("episodes", 1)
+    steps = config_file["training"].get("steps", 1)
+
+    figure_name = f"ac_bootstrap_run_lr{lr}_ep{episodes}_steps{steps}"
 
     # Initialize the trainer with ActorCriticNet as the network.
     trainer = Trainer_ActorCritic(env_name, Net=ActorCriticNet, config_file=config_file, results_path=results_path)
 
     # Train the Actor–Critic agent (without advantage subtraction) and plot metrics.
     avg_rewards, steps_list, total_episodes = trainer.train_actor_critic()
-    plot_metrics(avg_rewards, steps_list, save_path=results_path, figure_name="ac_bootstrap_run", model_name=model_name)
+    plot_metrics(avg_rewards, steps_list, save_path=results_path, figure_name=figure_name, model_name=model_name)
