@@ -7,7 +7,7 @@
       "lr": 0.001,
       "gamma": 0.99,
       "steps": 300000,
-      "episodes": 1000,
+      "episodes": 6000,
       "iterations": 1,
       "avg_window": 10
     }
