@@ -4,7 +4,7 @@
       "l2_units": 128
     },
     "training": {
-      "lr": 0.01,
+      "lr": 0.005,
       "gamma": 0.99,
       "steps": 50000,
       "episodes": 1000,

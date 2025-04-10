@@ -7,7 +7,7 @@ def plot_metrics(rewards, steps,
                             save_path=None, 
                             figure_name="reinforce_single", 
                             smoothing_window=10, 
-                            num_points=200):
+                            num_points=200, model_name=""):
     
     sns.set_style("whitegrid")
     plt.figure(figsize=(10, 5))
@@ -25,7 +25,7 @@ def plot_metrics(rewards, steps,
     
     plt.xlabel("Total Steps")
     plt.ylabel("Average Episode Reward")
-    plt.title("Training Progress: REINFORCE (Single Run)")
+    plt.title(f"Training Progress: {model_name} (Single Run)")
     plt.grid(True)
     plt.legend(loc="best")
 
