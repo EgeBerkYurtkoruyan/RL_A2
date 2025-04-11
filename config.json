@@ -3,12 +3,13 @@
       "l1_units": 64,
       "l2_units": 128
     },
-    "training": {
-      "lr": 0.01,
+    "training": 
+    {
+      "iterations": 5,
+      "lr": 0.001,
       "gamma": 0.99,
-      "steps": 50000,
-      "episodes": 1000,
-      "iterations": 1,
-      "avg_window": 10
+      "steps": 1000000,
+      "episodes": 10000,
+      "avg_window": 100
     }
   }

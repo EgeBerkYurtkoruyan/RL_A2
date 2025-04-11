@@ -45,7 +45,6 @@ class Trainer_Reinforce:
         gamma = gamma if gamma is not None else self.config["training"]["gamma"]
         avg_window = avg_window if avg_window is not None else self.config["training"]["avg_window"]
 
-
         model = self.Net(self.state_size, self.action_size,self.config["model"]["l1_units"],self.config["model"]["l2_units"])
         optimizer = optim.Adam(model.parameters(), lr=l_rate)
 
@@ -97,8 +96,23 @@ class Trainer_Reinforce:
         pbar.close()
         env.close()
         return avg_rewards, steps_list, total_episodes
+    
 
+    def train_repetitions(self, num_iterations:int=1):
+        # Load config parameters
+        rewards_reps = []
+        steps_reps = []
+        episodes_reps = []
+        print(f"Training model over {num_iterations} repetitions")
+        for it in range(num_iterations):
+            print(f"Running iteration: {it+1}")
+            avg_rewards, steps_list,total_episodes = self.train_reinforce()
+            rewards_reps.append(avg_rewards)
+            steps_reps.append(steps_list)
+            episodes_reps.append(total_episodes)
+        # Put reward and steps list together
 
+        return rewards_reps,steps_reps,episodes_reps
 
 
 
