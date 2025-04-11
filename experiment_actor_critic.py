@@ -17,7 +17,7 @@ class Experiment:
         self.config_file = load_config(self.config_path)
         self.iterations = self.config_file["training"]["iterations"]
         self.max_steps = self.config_file["training"]["steps"]
-        self.Net = Net
+        self.Net = ActorCriticNet
 
     def run_experiment(self, save_results: bool = False):
         print("Running single experiment with default configuration settings.")
@@ -29,7 +29,7 @@ class Experiment:
         os.makedirs(data_path, exist_ok=True)
         os.makedirs(plot_path, exist_ok=True)
 
-        trainer = Trainer_ActorCritic(self.env_name,self.Net,self.config_file)
+        trainer = Trainer_ActorCritic(self.env_name,self.Net,self.config_file) 
         # Structure results
         rewards_reps, steps_reps, episodes_reps = trainer.train_repetitions(num_iterations=self.iterations)
 

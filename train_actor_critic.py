@@ -200,4 +200,5 @@ if __name__ == "__main__":
 
     # Train the Actor–Critic agent (without advantage subtraction) and plot metrics.
     avg_rewards, steps_list, total_episodes = trainer.train_actor_critic()
-    plot_metrics(avg_rewards, steps_list, save_path=results_path, figure_name=figure_name, model_name=model_name)
+
+    #plot_metrics(avg_rewards, steps_list, save_path=results_path, figure_name=figure_name, model_name=model_name)
