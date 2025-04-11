@@ -1,6 +1,6 @@
 from utils.load_file import load_config, save_metrics
 import os
-from train import Trainer_Reinforce
+from train_reinforce import Trainer_Reinforce
 from models.model import PolicyNet
 
 class Experiment:
