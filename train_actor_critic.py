@@ -164,6 +164,22 @@ class Trainer_ActorCritic:
         pbar.close()
         env.close()
         return avg_rewards, steps_list, total_episodes
+    
+    def train_repetitions(self, num_iterations:int=1):
+        # Load config parameters
+        rewards_reps = []
+        steps_reps = []
+        episodes_reps = []
+        print(f"Training model over {num_iterations} repetitions")
+        for it in range(num_iterations):
+            print(f"Running iteration: {it+1}")
+            avg_rewards, steps_list, total_episodes = self.train_actor_critic()
+            rewards_reps.append(avg_rewards)
+            steps_reps.append(steps_list)
+            episodes_reps.append(total_episodes)
+        # Put reward and steps list together
+
+        return rewards_reps,steps_reps,episodes_reps
 
 
 if __name__ == "__main__":

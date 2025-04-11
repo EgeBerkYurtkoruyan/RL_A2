@@ -1,14 +1,15 @@
 {
-    "model": {
-      "l1_units": 64,
-      "l2_units": 128
-    },
-    "training": {
-      "lr": 0.001,
-      "gamma": 0.99,
-      "steps": 300000,
-      "episodes": 6000,
-      "iterations": 1,
-      "avg_window": 10
-    }
+  "model": {
+    "l1_units": 64,
+    "l2_units": 128
+  },
+  "training": 
+  {
+    "iterations": 1,
+    "lr": 0.001,
+    "gamma": 0.99,
+    "steps": 1000,
+    "episodes": 10,
+    "avg_window": 100
   }
+}
