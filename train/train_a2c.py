@@ -144,6 +144,6 @@ if __name__ == "__main__":
     config_path = "config.json"
     config = load_config(config_path)
 
-    trainer = Trainer_AdvantageActorCritic(env_name, PolicyClass=PolicyNet, ValueClass=ValueNet, config_file=config)
+    trainer = Trainer_AdvantageActorCritic(env_name, PolicyClass=PolicyNet, ValueClass=ValueNet, config_file=config, advantage=True)
     rewards, steps, episodes = trainer.advantage_train_actor_critic()
     plot_metrics([rewards], [steps], [episodes], save_path="results", figure_name="advantage_actor_critic_single_run")
