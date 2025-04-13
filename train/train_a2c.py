@@ -36,7 +36,7 @@ class Trainer_AdvantageActorCritic :
             Q_n.append(G)
         return torch.tensor(Q_n, dtype=torch.float32)
 
-    def train_actor_critic(self, l_rate=None, max_steps=None, gamma=None, n=None, avg_window=None):
+    def advantage_train_actor_critic(self, l_rate=None, max_steps=None, gamma=None, n=None, avg_window=None):
         max_steps = max_steps or self.config["training"]["steps"]
         l_rate = l_rate or self.config["training"]["lr"]
         gamma = gamma or self.config["training"]["gamma"]
@@ -132,7 +132,7 @@ class Trainer_AdvantageActorCritic :
         rewards_reps, steps_reps, episodes_reps = [], [], []
         for it in range(num_iterations):
             print(f"Iteration {it+1}/{num_iterations}")
-            rewards, steps, episodes = self.train_actor_critic()
+            rewards, steps, episodes = self.advantage_train_actor_critic()
             rewards_reps.append(rewards)
             steps_reps.append(steps)
             episodes_reps.append(episodes)
@@ -145,5 +145,5 @@ if __name__ == "__main__":
     config = load_config(config_path)
 
     trainer = Trainer_AdvantageActorCritic(env_name, PolicyClass=PolicyNet, ValueClass=ValueNet, config_file=config)
-    rewards, steps, episodes = trainer.train_actor_critic()
-    plot_metrics([rewards], [steps], [episodes], save_path="results", figure_name="actor_critic_single_run")
+    rewards, steps, episodes = trainer.advantage_train_actor_critic()
+    plot_metrics([rewards], [steps], [episodes], save_path="results", figure_name="advantage_actor_critic_single_run")
