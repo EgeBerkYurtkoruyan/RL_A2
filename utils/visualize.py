@@ -79,11 +79,11 @@ def plot_metrics(rewards_list, steps_list, episodes_list,
 
 
 if __name__ == "__main__":
-    folder_path = "results/reinforce/experiment/data"
-    file_name = "test_data.json"
+    folder_path = "results/AC/experiment/data"
+    file_name = "ac_5_it_lr_data.json"
     file_path = os.path.join(folder_path, file_name)
 
-    save_path = "results/reinforce/experiment/plot"
+    save_path = "results/AC/experiment/plot"
 
     with open(file_path, "r") as f:
         data = json.load(f)
@@ -95,4 +95,4 @@ if __name__ == "__main__":
 
     plot_metrics(rewards_list, steps_list, episodes_list, 
                  save_path=save_path, 
-                 figure_name="reinforce_run_plot")
+                 figure_name="ac_run_plot")

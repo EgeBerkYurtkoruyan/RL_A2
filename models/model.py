@@ -23,6 +23,20 @@ class PolicyNet(nn.Module):
         x = F.softmax(self.fc3(x),dim=1)
         return x
     
+
+class ValueNet(nn.Module):
+    def __init__(self, state_size, l1_units=64, l2_units=128):
+        super(ValueNet, self).__init__()
+        self.fc1 = nn.Linear(state_size, l1_units)
+        self.fc2 = nn.Linear(l1_units, l2_units)
+        self.fc3 = nn.Linear(l2_units, 1)  # Output a single scalar value
+
+    def forward(self, x):
+        x = F.relu(self.fc1(x))
+        x = F.relu(self.fc2(x))
+        x = self.fc3(x)  # No activation on layer output
+        return x
+
 if __name__ == '__main__':
     
     env_name = 'CartPole-v1'
@@ -31,6 +45,7 @@ if __name__ == '__main__':
     print(f"Each state is defined by  {state_size} variables")
     action_size = env.action_space.n
     q_model= PolicyNet(state_size, action_size,64,128)
+    v_model= ValueNet(state_size,64,128)
     print("Model was correctly initialized")
     summary(q_model, input_size=(1, state_size))
 
