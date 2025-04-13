@@ -2,6 +2,7 @@ from utils.load_file import load_config, save_metrics
 import os
 from train.train_reinforce import Trainer_Reinforce
 from train.train_ac import Trainer_ActorCritic
+from train.train_a2c import Trainer_AdvantageActorCritic
 from models.model import PolicyNet, ValueNet
 from dotenv import load_dotenv
 
@@ -45,7 +46,11 @@ class Experiment:
                                             ValueClass=ValueNet, 
                                             config_file=self.config_file)
         elif self.method == "A2C":
-            pass
+            print("Running A2C method.")
+            trainer = Trainer_AdvantageActorCritic(env_name = self.env_name,
+                                            PolicyClass=PolicyNet, 
+                                            ValueClass=ValueNet, 
+                                            config_file=self.config_file)
         else:
             print("Method not defined. Please use REINFORCE, AC or A2C.")
         
@@ -75,7 +80,7 @@ if __name__ == "__main__":
     env_name = os.getenv("ENV_NAME") # Environment name
     config_path = os.getenv("CONFIG_PATH") # Path to config file
 
-    method = "AC" # Define the method between REINFORCE , AC, A2C
+    method = "A2C" # Define the method between REINFORCE , AC, A2C
 
     exp_name = "ac_5_it_lr" # Name of experiment
 
