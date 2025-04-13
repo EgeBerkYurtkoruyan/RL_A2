@@ -1,7 +1,7 @@
 {
     "model": {
-      "l1_units": 128,
-      "l2_units": 256
+      "l1_units": 64,
+      "l2_units": 128
     },
     "training": 
     {
