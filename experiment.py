@@ -80,7 +80,7 @@ if __name__ == "__main__":
     env_name = os.getenv("ENV_NAME") # Environment name
     config_path = os.getenv("CONFIG_PATH") # Path to config file
 
-    method = "AC" # Define the method between REINFORCE , AC, A2C
+    method = "A2C" # Define the method between REINFORCE , AC, A2C
 
     exp_name = "ac_5_it_lr" # Name of experiment
 
