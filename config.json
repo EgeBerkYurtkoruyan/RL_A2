@@ -1,7 +1,7 @@
 {
     "model": {
-      "l1_units": 64,
-      "l2_units": 128
+      "l1_units": 128,
+      "l2_units": 256
     },
     "training": 
     {
@@ -11,6 +11,8 @@
       "steps": 1000000,
       "episodes": 10000,
       "avg_window": 100,
-      "n_steps":1
+      "n_steps":5,
+      "advantage": false
     }
+    
   }

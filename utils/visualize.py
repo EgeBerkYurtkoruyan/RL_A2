@@ -79,11 +79,11 @@ def plot_metrics(rewards_list, steps_list, episodes_list,
 
 
 if __name__ == "__main__":
-    folder_path = "results/AC/experiment/data"
-    file_name = "ac_5_it_lr_data.json"
+    folder_path = "results/REINFORCE/experiment/data"
+    file_name = "reinforce_1_data.json"
     file_path = os.path.join(folder_path, file_name)
 
-    save_path = "results/AC/experiment/plot"
+    save_path = "results/REINFORCE/experiment/plot"
 
     with open(file_path, "r") as f:
         data = json.load(f)

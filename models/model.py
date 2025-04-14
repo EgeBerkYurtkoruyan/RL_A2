@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 from torchinfo import summary
 
 ## We will define here the policy network which is a represented by a set of parameters in this case weights in a nueral network
-
+ 
 class PolicyNet(nn.Module):
     def __init__(self,state_size,action_size,l1_units=64,l2_units=128):
         super(PolicyNet,self).__init__()

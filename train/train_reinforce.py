@@ -45,6 +45,8 @@ class Trainer_Reinforce:
         gamma = gamma if gamma is not None else self.config["training"]["gamma"]
         avg_window = avg_window if avg_window is not None else self.config["training"]["avg_window"]
 
+        print(f"Running REINFORCE with lr: {l_rate}")
+
         print("Initializing model for REINFORCE")
         model = self.Net(self.state_size, self.action_size,self.config["model"]["l1_units"],self.config["model"]["l2_units"])
         optimizer = optim.Adam(model.parameters(), lr=l_rate)

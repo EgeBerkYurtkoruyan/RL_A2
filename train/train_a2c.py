@@ -37,6 +37,11 @@ class Trainer_AdvantageActorCritic :
         return torch.tensor(Q_n, dtype=torch.float32)
 
     def advantage_train_actor_critic(self, l_rate=None, max_steps=None, gamma=None, n=None, avg_window=None):
+        if self.advantage:
+            print("Training Advantage Actor-Critic")
+        else:
+            print("Training Actor-Critic")
+        
         max_steps = max_steps or self.config["training"]["steps"]
         l_rate = l_rate or self.config["training"]["lr"]
         gamma = gamma or self.config["training"]["gamma"]
@@ -108,9 +113,11 @@ class Trainer_AdvantageActorCritic :
             # ---- Actor Update ----
             log_probs_tensor = torch.stack(log_probs)
             if self.advantage:
+                #print("Traing A2C with advantage")
                 advantages = Q_n.detach() - values_tensor
                 policy_loss = -torch.sum(advantages * log_probs_tensor)
             else:
+                #print("Training AC without advantage")
                 policy_loss = -torch.sum(Q_n.detach() * log_probs_tensor)
 
             policy_optim.zero_grad()
