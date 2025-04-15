@@ -21,6 +21,9 @@ This project implements several reinforcement learning algorithms for the CartPo
 
 - **Experiment Management**  
   - `experiment.py`: A script to run experiments with multiple repetitions and ablation studies, allowing an analysis of performance across different hyperparameters.
+  - You can run the the experiment code by
+    ```bash
+    python experiment.py
 
 ## Requirements
 
