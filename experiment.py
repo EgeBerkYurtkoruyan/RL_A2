@@ -23,7 +23,7 @@ class Experiment:
 
     def run_experiment(self, save_results: bool = False):
         print("Running single experiment with default configuration settings.")
-        # Define paths for saving results
+        # defining the paths for saving results. it is going to write to the folder specified
         experiment_path = os.path.join(os.path.join("results",self.method), "experiment")
         os.makedirs(experiment_path, exist_ok=True)
         data_path = os.path.join(experiment_path, "data")
@@ -31,7 +31,7 @@ class Experiment:
         os.makedirs(data_path, exist_ok=True)
         os.makedirs(plot_path, exist_ok=True)
 
-        ## Define method between REINFORCE and Actor-Critic and A2C
+        ## defining the method between REINFORCE and Actor-Critic and A2C. It can be controlled from main below
         if self.method == "REINFORCE":
             print("Running REINFORCE method.")
             trainer = Trainer_Reinforce(env_name=self.env_name,
@@ -55,7 +55,7 @@ class Experiment:
         
 
         
-        # Structure results
+        # results
         rewards_reps, steps_reps, episodes_reps = trainer.train_repetitions(num_iterations=self.iterations)
 
         experiment_data = {
@@ -65,7 +65,7 @@ class Experiment:
         }
         file_name = self.exp_name + "_data"
         if save_results:
-            # Save metrics
+            # Saving metrics
             save_metrics(data=experiment_data, results_path=data_path, filename=file_name)
         return experiment_data
     
@@ -77,7 +77,7 @@ class Experiment:
     
         print(f"Running ablation for parameter {param_name}")
         
-        # Define base path: results/<METHOD>/ablation/
+        # Defining the base path: results/<METHOD>/ablation/. 
         ablation_path = os.path.join("results", self.method, "ablation_a2c")
         os.makedirs(ablation_path, exist_ok=True)
 
@@ -132,7 +132,7 @@ class Experiment:
             else:
                 raise ValueError(f"Unsupported method: {self.method}")
 
-            # Train
+            # Training process
             rewards_reps, steps_reps, episodes_reps = trainer.train_repetitions(num_iterations=self.iterations)
             ablation_reps = (rewards_reps, steps_reps, episodes_reps)
 
@@ -152,7 +152,7 @@ class Experiment:
 
             if save_results:
                 save_metrics(data=ablation_data, results_path=data_path, filename=file_name)
-                # Optionally plot_metrics()
+                
 
         return ablation_results
 

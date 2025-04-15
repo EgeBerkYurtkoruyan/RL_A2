@@ -9,6 +9,7 @@ import matplotlib.pyplot as plt
 from torchinfo import summary
 
 ## We will define here the policy network which is a represented by a set of parameters in this case weights in a nueral network
+## base classes
  
 class PolicyNet(nn.Module):
     def __init__(self,state_size,action_size,l1_units=64,l2_units=128):
@@ -29,12 +30,12 @@ class ValueNet(nn.Module):
         super(ValueNet, self).__init__()
         self.fc1 = nn.Linear(state_size, l1_units)
         self.fc2 = nn.Linear(l1_units, l2_units)
-        self.fc3 = nn.Linear(l2_units, 1)  # Output a single scalar value
+        self.fc3 = nn.Linear(l2_units, 1)  
 
     def forward(self, x):
         x = F.relu(self.fc1(x))
         x = F.relu(self.fc2(x))
-        x = self.fc3(x)  # No activation on layer output
+        x = self.fc3(x)  # No activitaion layer or outpur
         return x
 
 if __name__ == '__main__':

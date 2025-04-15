@@ -13,7 +13,7 @@ def plot_multiple_experiments_mean(json_paths, smoothing_window=30, num_points=2
 
     all_data = []
 
-    # First pass: determine global step range
+    # First pass: we are determining the global step range
     for json_path in json_paths:
         with open(json_path, "r") as f:
             data = json.load(f)
@@ -25,7 +25,7 @@ def plot_multiple_experiments_mean(json_paths, smoothing_window=30, num_points=2
 
     common_steps = np.linspace(global_min_step, global_max_step, num_points)
 
-    # Second pass: process each file
+    # Second pass: processing  each file
     for json_path in json_paths:
         filename = os.path.basename(json_path)
         label = filename.split('_')[0]  # e.g., "reinforce_exp_data.json" → "reinforce"
