@@ -16,7 +16,7 @@ This project implements several reinforcement learning algorithms for the CartPo
   - `plot_mean_results.py`: Contains functions to visualize the mean results from multiple experiment repetitions. 
 
 - **Configuration and Dependencies**  
-  - `config.json`: Stores model hyperparameters (e.g., layer units) and training parameters such as learning rate, discount factor, total steps, and more.  
+  - `config.json.py`: **You need to remove .py extension before using it.** Stores model hyperparameters (e.g., layer units) and training parameters such as learning rate, discount factor, total steps, and more.  
   - `requirements.txt`: Lists all Python dependencies required to run the project.
 
 - **Experiment Management**  
