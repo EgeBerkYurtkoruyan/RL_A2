@@ -79,7 +79,7 @@ class Experiment:
         print(f"Running ablation for parameter {param_name}")
         
         # Define base path: results/<METHOD>/ablation/
-        ablation_path = os.path.join("results", self.method, "ablation")
+        ablation_path = os.path.join("results", self.method, "ablation_a2c")
         os.makedirs(ablation_path, exist_ok=True)
 
         if section == "model":
@@ -169,22 +169,22 @@ if __name__ == "__main__":
     env_name = os.getenv("ENV_NAME") # Environment name
     config_path = os.getenv("CONFIG_PATH") # Path to config file
 
-    method = "REINFORCE" # Define the method between REINFORCE , AC, A2C
+    method = "A2C" # Define the method between REINFORCE , AC, A2C
 
-    exp_name = "reinforce_1" # Name of experiment
+    exp_name = "a2c_exp" # Name of experiment
 
     # Initialize experiment
     exp = Experiment(method=method,
-    env_name = env_name,
+                    env_name = env_name,
                      exp_name = exp_name ,
                      config_path = config_path)
     # Run experiment
-    #exp.run_experiment(save_results=True)
+    exp.run_experiment(save_results=True)
     # Define the values for the ablation study
-    lr_vals = [0.01,0.001,0.003,0.0005,0.0001]
-    l_rate_data = exp.run_ablation(section="training",param_name = "lr",
-                                     param_values = lr_vals,
-                                     save_results=True)
+    #lr_vals = [0.01,0.001,0.003,0.0005,0.0001]
+    #l_rate_data = exp.run_ablation(section="training",param_name = "lr",
+    #                                 param_values = lr_vals,
+     #                                save_results=True)
 
 
 

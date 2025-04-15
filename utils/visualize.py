@@ -79,8 +79,8 @@ def plot_metrics(rewards_list, steps_list, episodes_list,
 
 
 if __name__ == "__main__":
-    folder_path = "results/REINFORCE/experiment/data"
-    file_name = "reinforce_1_data.json"
+    folder_path = "results/A2C/experiment/data"
+    file_name = "a2c_exp_data.json"
     file_path = os.path.join(folder_path, file_name)
 
     save_path = "results/REINFORCE/experiment/plot"

@@ -48,7 +48,7 @@ class Trainer_AdvantageActorCritic :
         n = n or self.config["training"]["n_steps"]
         avg_window = avg_window or self.config["training"]["avg_window"]
 
-        print("Initializing Policty and Value model for A2C")
+        #print("Initializing Policty and Value model for A2C")
 
         policy_net = self.PolicyClass(self.state_size, self.action_size,
                                       self.config["model"]["l1_units"],
