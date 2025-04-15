@@ -47,7 +47,7 @@ def plot_metrics(rewards_list, steps_list, episodes_list,
     print(f"Average number of episodes: {avg_episodes}")
     print(f"Last obtained reward: {last_reward}")
 
-    # Plot mean line
+    # Plot the mean line
     sns.lineplot(x=common_steps, y=mean_rewards, label="Mean Reward", color="black", linewidth=2)
 
     # Shaded std area

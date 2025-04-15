@@ -19,12 +19,12 @@ import seaborn as sns
 import glob
 import re
 
-# For each experiment performed in the ablation study calculates the mean of the five iterations, apply the process to all the values tried for
-# a given parameter
+# For each experiment performed in the ablation study calculates the mean of the five iterations
+# applying the process to all the values tried for a given parameter
 def plot_experiment_means(folder_path, param_name, save_path=None, figure_name="experiment_means",
                          num_points=200, smoothing_window=10):
     
-    # Get all JSON files in the folder
+    # Getting all JSON files in the folder
     json_files = glob.glob(os.path.join(folder_path, "*.json"))
     
     if not json_files:
@@ -64,15 +64,17 @@ def plot_experiment_means(folder_path, param_name, save_path=None, figure_name="
     for i, json_file in enumerate(json_files):
         filename = os.path.basename(json_file)
         
-        # Extract parameter value from filename using regex
+        # Extract parameter value from the filename using regular expression (regex)
         # Pattern looks for value between "dqn_" and "_data"
         match = re.search(r'_([\d.]+)_data\.json$', filename)
+
+        
         #match = re.search(r'dqn_(\d+_\d+)', filename)
         if match:
             param_value = match.group(1)
             exp_label = f"{param_name} = {param_value}"
         else:
-            # Fallback if pattern doesn't match
+            # Fallback if no match
             exp_label = os.path.basename(json_file).replace('.json', '')
         
         with open(json_file, "r") as f:
@@ -82,7 +84,7 @@ def plot_experiment_means(folder_path, param_name, save_path=None, figure_name="
         steps_reps = ablation_data["steps"]
         episodes_reps = ablation_data.get("episodes", [])
         
-        # Process each iteration in this experiment
+        # Process each iteration in this experimentt
         smoothed_rewards_list = []
         
         for rewards, steps in zip(rewards_reps, steps_reps):
@@ -104,7 +106,7 @@ def plot_experiment_means(folder_path, param_name, save_path=None, figure_name="
             # Plot the mean for this experiment
             sns.lineplot(x=common_steps, y=exp_mean, label=exp_label, linewidth=2)
     
-    # Labels and title
+    # Labels, title and legend
     plt.xlabel("Total Steps")
     plt.ylabel("Average Reward")
     plt.title(rf"$\bf{{Average\ Rewards\ vs\ Steps\ -\ Ablation\ Study}}$" 
@@ -131,7 +133,7 @@ def plot_experiment_means(folder_path, param_name, save_path=None, figure_name="
 def plot_final(folder_path, save_path=None, figure_name="experiment_means",
                          num_points=200, smoothing_window=10):
     
-    # Get all JSON files in the folder
+    # Getting all JSON files in the folder
     json_files = glob.glob(os.path.join(folder_path, "*.json"))
     
     if not json_files:
@@ -197,15 +199,16 @@ def plot_final(folder_path, save_path=None, figure_name="experiment_means",
                     interp_rewards = np.interp(common_steps, valid_steps, smoothed_rewards)
                     smoothed_rewards_list.append(interp_rewards)
                     
-                    # Plot individual repetitions
+                    # optional Plot individual repetitions
                     #sns.lineplot(x=common_steps, y=interp_rewards, alpha=0.3, linewidth=1, color='gray')
         
         if smoothed_rewards_list:
-            # Calculate mean across all iterations for this experiment
+            # Calculate mean across all iterations
+
             exp_mean = np.mean(np.array(smoothed_rewards_list), axis=0)
             experiment_means.append((exp_label, exp_mean))
             
-            # Plot the mean for this experiment
+            # Plotting the MEAN for this experiment
             sns.lineplot(x=common_steps, y=exp_mean, label=exp_label, linewidth=2)
     
     # Labels and title
