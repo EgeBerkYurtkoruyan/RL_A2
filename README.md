@@ -16,7 +16,6 @@ This project implements several reinforcement learning algorithms for the CartPo
   - `plot_mean_results.py`: Contains functions to visualize the mean results from multiple experiment repetitions. 
 
 - **Configuration and Dependencies**  
-  - `config.json.py`: **You need to remove .py extension before using it.** Stores model hyperparameters (e.g., layer units) and training parameters such as learning rate, discount factor, total steps, and more.  
   - `requirements.txt`: Lists all Python dependencies required to run the project.
 
 - **Experiment Management**  
@@ -27,9 +26,30 @@ This project implements several reinforcement learning algorithms for the CartPo
 
 ## Requirements
 
-**You need to remove .py extension of config.json.py before using it.** 
+Your folder structure should look like 
 
-Make sure you have Python 3.8 or higher installed. Then, install the dependencies using pip:
+```
+📁 RL_A2/
+├── 📁 models/                 # Contains model definitions
+│   └── model.py
+├── 📁 results/                # Directory for storing results
+├── 📁 results_final/          # Directory for storing final results
+├── 📁 train/                  # Training scripts for different algorithms
+│   ├── train_a2c.py
+│   ├── train_ac.py
+│   └── train_reinforce.py
+├── 📁 utils/                  # Utility functions (e.g., logging, plotting)
+│   ├── load_file.py
+│   ├── plot_mean_results.py
+│   └── visualize.py
+├── experiment.py             # Entry point or experiment runner
+├── view_results.py           # Script to visualize or analyze results
+├── requirements.txt          # Python dependencies
+└── README.md                 # Project documentation
+
+```
+
+Make sure you have Python 3.12 or higher installed. Then, install the dependencies using pip:
 
 ```bash
 pip install -r requirements.txt
