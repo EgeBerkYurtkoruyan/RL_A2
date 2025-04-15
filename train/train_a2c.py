@@ -148,8 +148,7 @@ class Trainer_AdvantageActorCritic :
 
 if __name__ == "__main__":
     env_name = "CartPole-v1"
-    config_path = "config.json"
-    config = load_config(config_path)
+    config = load_config()
 
     trainer = Trainer_AdvantageActorCritic(env_name, PolicyClass=PolicyNet, ValueClass=ValueNet, config_file=config, advantage=True)
     rewards, steps, episodes = trainer.advantage_train_actor_critic()

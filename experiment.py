@@ -16,8 +16,7 @@ class Experiment:
         self.method = method
         self.exp_name = exp_name
         self.env_name = env_name
-        self.config_path = config_path
-        self.config_file = load_config(self.config_path)
+        self.config_file = load_config()
         self.iterations = self.config_file["training"]["iterations"]
         self.max_steps = self.config_file["training"]["steps"]
         self.advantage = self.config_file["training"]["advantage"]
@@ -166,8 +165,8 @@ if __name__ == "__main__":
 
     if not os.path.exists("results"):
         os.mkdir("results")
-    env_name = "CartPole-v1"
-    config_path = "CartPole-v1"
+    env_name = "CartPole-v1" # Environment name
+    config_path = os.getenv("CONFIG_PATH") # Path to config file
 
     method = "A2C" # Define the method between REINFORCE , AC, A2C
 

@@ -136,8 +136,7 @@ class Trainer_ActorCritic:
 
 if __name__ == "__main__":
     env_name = "CartPole-v1"
-    config_path = "config.json"
-    config = load_config(config_path)
+    config = load_config()
 
     trainer = Trainer_ActorCritic(env_name, PolicyClass=PolicyNet, ValueClass=ValueNet, config_file=config)
     rewards, steps, episodes = trainer.train_actor_critic()

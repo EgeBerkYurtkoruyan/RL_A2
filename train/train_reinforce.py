@@ -124,8 +124,7 @@ class Trainer_Reinforce:
 if __name__ == "__main__":
     results_path = "results"
     env_name = "CartPole-v1"
-    config_path = "config.json"
-    config_file = load_config(config_path)
+    config_file = load_config()
 
     # Create the trainer
     trainer = Trainer_Reinforce(env_name, Net=PolicyNet, config_file=config_file, results_path=results_path)

@@ -1,11 +1,24 @@
 import json
 import os
 
-def load_config(file_path):
+def load_config():
     try:
-        with open(file_path) as f:
-            d = json.load(f)
-            return d
+        return{
+            "model": {
+                "l1_units": 128,
+                "l2_units": 256
+            },
+            "training": {
+                "iterations":5,
+                "lr": 0.0001,
+                "gamma": 0.99,
+                "steps": 1000000,
+                "episodes": 10000,
+                "avg_window": 100,
+                "n_steps":1,
+                "advantage": True
+            }
+        }
     except Exception as e:
         print(f"Error loading config file: {e}")
 
