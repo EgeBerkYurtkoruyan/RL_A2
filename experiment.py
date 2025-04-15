@@ -166,8 +166,8 @@ if __name__ == "__main__":
 
     if not os.path.exists("results"):
         os.mkdir("results")
-    env_name = os.getenv("ENV_NAME") # Environment name
-    config_path = os.getenv("CONFIG_PATH") # Path to config file
+    env_name = "CartPole-v1"
+    config_path = "CartPole-v1"
 
     method = "A2C" # Define the method between REINFORCE , AC, A2C
 
