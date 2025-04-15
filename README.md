@@ -26,28 +26,6 @@ This project implements several reinforcement learning algorithms for the CartPo
 
 ## Requirements
 
-Your folder structure should look like 
-
-```
-📁 RL_A2/
-├── 📁 models/                 # Contains model definitions
-│   └── model.py
-├── 📁 results/                # Directory for storing results
-├── 📁 results_final/          # Directory for storing final results
-├── 📁 train/                  # Training scripts for different algorithms
-│   ├── train_a2c.py
-│   ├── train_ac.py
-│   └── train_reinforce.py
-├── 📁 utils/                  # Utility functions (e.g., logging, plotting)
-│   ├── load_file.py
-│   ├── plot_mean_results.py
-│   └── visualize.py
-├── experiment.py             # Entry point or experiment runner
-├── view_results.py           # Script to visualize or analyze results
-├── requirements.txt          # Python dependencies
-└── README.md                 # Project documentation
-
-```
 
 Make sure you have Python 3.12 or higher installed. Then, install the dependencies using pip:
 
