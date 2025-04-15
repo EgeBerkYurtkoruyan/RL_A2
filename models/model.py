@@ -30,7 +30,7 @@ class ValueNet(nn.Module):
         super(ValueNet, self).__init__()
         self.fc1 = nn.Linear(state_size, l1_units)
         self.fc2 = nn.Linear(l1_units, l2_units)
-        self.fc3 = nn.Linear(l2_units, 1)  
+        self.fc3 = nn.Linear(l2_units, 1)  # Single
 
     def forward(self, x):
         x = F.relu(self.fc1(x))
