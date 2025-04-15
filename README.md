@@ -27,6 +27,8 @@ This project implements several reinforcement learning algorithms for the CartPo
 
 ## Requirements
 
+**You need to remove .py extension of config.json.py before using it.** 
+
 Make sure you have Python 3.8 or higher installed. Then, install the dependencies using pip:
 
 ```bash
