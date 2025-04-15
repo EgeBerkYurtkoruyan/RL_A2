@@ -1,46 +1,30 @@
-# Deep Reinforcement Learning Assignment 2
+# RL Master Course Assignment: Policy Gradient and Actor-Critic Methods
 
-This repository contains the source code for the Deep Reinforcement Learning (DRL) Assignment 2. Before running the experiments, please set up the folder structure as described below. Since files cannot be uploaded in a .zip format, you will need to create the necessary folders manually.
+This project implements several reinforcement learning algorithms for the CartPole environment including the REINFORCE algorithm, basic Actor-Critic (AC), and Advantage Actor-Critic (A2C). 
 
+## Project Structure
 
-## Setup and Installation
-Clone the repository and navigate to its directory.
-Install dependencies using pip:
+- **Training Scripts**  
+  - `train_reinforce.py`: Implements the REINFORCE algorithm.  
+  - `train_ac.py`: Implements the basic Actor-Critic (AC) algorithm.  
+  - `train_a2c.py`: Implements the Advantage Actor-Critic (A2C) algorithm with advantage calculations.
 
-**pip install -r requirements.txt**
+- **Model and Utility Files**  
+  - `model.py`: Contains the definitions for `PolicyNet` and `ValueNet`, the neural networks used for the policy and value approximations. 
+  - `load_file.py`: Provides utility functions to load the configuration file and save metrics. 
+  - `visualize.py`: Offers functions to plot training metrics such as rewards over time. 
+  - `plot_mean_results.py`: Contains functions to visualize the mean results from multiple experiment repetitions. 
 
-## Folder Structure Setup
+- **Configuration and Dependencies**  
+  - `config.json`: Stores model hyperparameters (e.g., layer units) and training parameters such as learning rate, discount factor, total steps, and more.  
+  - `requirements.txt`: Lists all Python dependencies required to run the project.
 
-### 1. `models` Folder
-- **Create a folder named `models`.**
-- Place the file `model.py` in this folder.
-- **Note:** `model.py` contains the `PolicyNet` and `ValueNet` classes that are used in the project.
+- **Experiment Management**  
+  - `experiment.py`: A script to run experiments with multiple repetitions and ablation studies, allowing an analysis of performance across different hyperparameters.
 
-### 2. `trains` Folder
-- **Create a folder named `trains`.**
-- Place the following training scripts in this folder:
-  - `train_reinforce.py`
-  - `train_ac.py`
-  - `train_a2c.py`
-- **Note:** Each file contains the training code for its respective model.
+## Requirements
 
-### 3. `utils` Folder
-- **Create a folder named `utils`.**
-- This folder should include:
-  - A configuration loader module (for example, a script to load configurations using `load_file.py`).
-  - Code for visualization and other utility functions required by the project (**plot_mean_results.py** and **visualize.py**).
+Make sure you have Python 3.8 or higher installed. Then, install the dependencies using pip:
 
-## Running the Experiment
-
-- The experiment is started by running the following command in your terminal: **python experiment.py**
-
-  
-- **Configuration:**  
-The script reads hyperparameters and other settings (such as the number of iterations) from `config.json`.
-- **Output:**  
-Upon execution, the experiment results will be written to an automatically created folder. The naming convention of this folder reflects the current method used for the source file.
-
-## Additional Notes
-
-- **Preparation:** Ensure your directory structure matches the above instructions before running the experiments.
-- **Modifications:** Adjust hyperparameters or other settings as needed in the `config.json` file.
+```bash
+pip install -r requirements.txt
